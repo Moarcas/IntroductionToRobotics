@@ -17,6 +17,6 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
 ### Photo:
 ![](https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework1/homework1.jpg)
 
-### [Video](https://youtube.com/shorts/LmKkNPQ6G3c?feature=share)
-![](https://youtube.com/shorts/LmKkNPQ6G3c?feature=share)
+### Video:
+![Watch the video](https://youtube.com/shorts/LmKkNPQ6G3c?feature=share)
 </details>
