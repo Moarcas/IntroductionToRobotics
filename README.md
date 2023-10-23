@@ -3,15 +3,16 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
 
 <details>
   <summary>
-  ## Homework 1 - RGB LED
+  Homework 1 - RGB LED
   </summary>
-  ### Components:
-    * 1 RGB LED
-    * 3 potentiometers
-    * 1 resistor and wires as needed
-  ### Technical Task:
-    * Use a separate potentiometer for controlling each color of the RGB LED: Red,
+## RGB LED with 3 potentiometers
+### Components:
+* 1 RGB LED
+* 3 potentiometers
+* 1 resistor and wires as needed
+### Technical Task:
+* Use a separate potentiometer for controlling each color of the RGB LED: Red,
 Green, and Blue. This control must leverage digital electronics. Specifically, you need to read the potentiometer’s value with Arduino and then write a mapped value to the LED pins.
-  ### Photo:
+### Photo:
 
  </details>
