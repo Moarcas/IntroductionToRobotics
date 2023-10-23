@@ -7,7 +7,7 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
   Homework 1 - RGB LED
   </summary>
   
-  ## RGB LED with 3 potentiometers
+  ### RGB LED with 3 potentiometers
   ### Components:
   * 1 RGB LED
   * 3 potentiometers
