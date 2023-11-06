@@ -66,33 +66,53 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
 
   ### Video:
   [![Watch the video](https://img.youtube.com/vi/2r7shoO6HCo/maxresdefault.jpg)](https://youtube.com/shorts/2r7shoO6HCo?feature=share)
-  
-</details>
+  </details>
 
-<details>
-  <summary>
-    Homework3 - 7 segment display drawing
-  </summary>
-  
-  ### 7 segment display drawing
-  ### Components:
-  * 1 7-segment display
-  * 1 joystick
-  * resistors and wires as needed
-  ### Technical Task:
-  * The initial position should be on the DP. The current
-  position always blinks (irrespective of the fact that the segment is on or
-  off). Use the joystick to move from one position to neighbors (see table for
-  corresponding movement). Short pressing the button toggles the segment
-  state from ON to OFF or from OFF to ON. Long pressing the button
-  resets the entire display by turning all the segments OFF and moving the
-  current position to the decimal point
-  
-  ### Photo:
-  ![](https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework3/homework3.jpg)
+  <details>
+    <summary>
+       Homework3 - 7 segment display drawing
+    </summary>
+    
+<h1 align="center">Homework3 - 7 Segment Display Drawing</h1>
 
-  ### Video:
-  [![Watch the video](https://img.youtube.com/vi/SJGTRuJBMLk/maxresdefault.jpg)](https://youtu.be/SJGTRuJBMLk)
+<p align="center">
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework3/homework3.jpg" alt="7 Segment Display Photo">
+</p>
+
+<h2 align="center">General description:</h2>
+
+<p align="center">
+  You will use the joystick to control the position of
+  the segment and ”draw” on the display. The movement between segments
+  should be natural, meaning they should jump from the current position
+  only to neighbors, but without passing through ”walls”.
+</p>
+
+<h2 align="center">Components</h2>
+
+- 1 x 7-segment display
+- 1 x joystick
+- Resistors and wires as needed
+
+<h2 align="center">Technical Task</h2>
+
+<p align="center">
+  The 7-segment display should have the initial position on the DP (decimal point). The current position always blinks, regardless of whether the segment is on or off. The joystick is used to move from one position to its neighboring segments.
+</p>
+
+<h2 align="center">Button Functions</h2>
+
+- Short pressing the button toggles the segment state from ON to OFF or from OFF to ON.
+- Long pressing the button resets the entire display by turning all the segments OFF and moving the current position to the decimal point.
+
+<h2 align="center">Video</h2>
+
+<p align="center">
+  <a href="https://youtu.be/SJGTRuJBMLk">
+    <img src="https://img.youtube.com/vi/SJGTRuJBMLk/maxresdefault.jpg" alt="Watch the video">
+  </a>
+</p>
+  </details>
   
-</details>
+
 
