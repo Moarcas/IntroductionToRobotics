@@ -68,3 +68,31 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
   [![Watch the video](https://img.youtube.com/vi/2r7shoO6HCo/maxresdefault.jpg)](https://youtube.com/shorts/2r7shoO6HCo?feature=share)
   
 </details>
+
+<details>
+  <summary>
+    Homework3 - 7 segment display drawing
+  </summary>
+  
+  ### 7 segment display drawing
+  ### Components:
+  * 1 7-segment display
+  * 1 joystick
+  * resistors and wires as needed
+  ### Technical Task:
+  * The initial position should be on the DP. The current
+  position always blinks (irrespective of the fact that the segment is on or
+  off). Use the joystick to move from one position to neighbors (see table for
+  corresponding movement). Short pressing the button toggles the segment
+  state from ON to OFF or from OFF to ON. Long pressing the button
+  resets the entire display by turning all the segments OFF and moving the
+  current position to the decimal point
+  
+  ### Photo:
+  ![](https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework3/homework3.jpg)
+
+  ### Video:
+  [![Watch the video](https://img.youtube.com/vi/SJGTRuJBMLk/maxresdefault.jpg)](https://youtu.be/SJGTRuJBMLk)
+  
+</details>
+
