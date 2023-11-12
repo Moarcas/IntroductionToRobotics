@@ -1,42 +1,43 @@
-// Define pin connections to the shift register
-const int latchPin = 11; // Pin for latching data into the register
-const int clockPin = 10; // Pin for the shift register clock
-const int dataPin = 12; // Pin for the serial data input to the shift register
-// Define control pins for the individual digits of the display
-const int segD1 = 4; // Control pin for the first digit
-const int segD2 = 5; // Control pin for the second digit
-const int segD3 = 6; // Control pin for the third digit
-const int segD4 = 7; // Control pin for the fourth digit
-// Constants for the register and number of encodings
-const int regSize = 8; // Number of bits in the register
+#ifndef SEGMENTDISPLAY.H
+#define SEGMENTDISPLAY.H
+
+const int latchPin = 11;
+const int clockPin = 10;
+const int dataPin = 12;
+
+const int segD1 = 4;
+const int segD2 = 5;
+const int segD3 = 6;
+const int segD4 = 7;
+
+const int regSize = 8;
                     
-// Array of digit control pins
 const int displayDigits[] = {
-segD1, segD2, segD3, segD4
+    segD1, segD2, segD3, segD4
 };
 
-const int displayCount = 4; // Number of digits in the display
-const int encodingsNumber = 16; // Number of different character encodings
+const int displayCount = 4; 
+const int encodingsNumber = 11;
 
-// Encoding array representing the segments of the display for numbers 0-9 and letters A-F
-const int encodingArray[encodingsNumber][regSize] = {
-  // A B C D E F G DP
-  {1, 1, 1, 1, 1, 1, 0, 0}, // 0
-  {0, 1, 1, 0, 0, 0, 0, 0}, // 1
-  {1, 1, 0, 1, 1, 0, 1, 0}, // 2
-  {1, 1, 1, 1, 0, 0, 1, 0}, // 3
-  {0, 1, 1, 0, 0, 1, 1, 0}, // 4
-  {1, 0, 1, 1, 0, 1, 1, 0}, // 5
-  {1, 0, 1, 1, 1, 1, 1, 0}, // 6
-  {1, 1, 1, 0, 0, 0, 0, 0}, // 7
-  {1, 1, 1, 1, 1, 1, 1, 0}, // 8
-  {1, 1, 1, 1, 0, 1, 1, 0}, // 9
-  {1, 1, 1, 0, 1, 1, 1, 0}, // A
-  {0, 0, 1, 1, 1, 1, 1, 0}, // b
-  {1, 0, 0, 1, 1, 1, 0, 0}, // C
-  {0, 1, 1, 1, 1, 0, 1, 0}, // d
-  {1, 0, 0, 1, 1, 1, 1, 0}, // E
-  {1, 0, 0, 0, 1, 1, 1, 0}, // F
+const int byteEncodings[encodingsNumber] = {
+    //A B C D E F G DP
+    B11111100, // 0
+    B01100000, // 1
+    B11011010, // 2
+    B11110010, // 3
+    B01100110, // 4
+    B10110110, // 5
+    B10111110, // 6
+    B11100000, // 7
+    B11111110, // 8
+    B11110110, // 9
+    B00000000, // empty disply
 };
 
-void writeReg(const int encoding[]);
+const int emptyDisplay = 10;
+
+void writeReg(int digit, int writeDp = 0);
+
+void writeNumberToDisplay(int number);
+
+#endif
