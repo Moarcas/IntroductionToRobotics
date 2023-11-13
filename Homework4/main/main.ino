@@ -45,6 +45,10 @@ void handleStartButton() {
 }
 
 void handleResetButton() {
+    if (currentMode == countMode) {
+        return;
+    }
+
     if (currentMode == lapViewMode) {
         indexLastLap = 0;
         indexCurrentLap = 0;
