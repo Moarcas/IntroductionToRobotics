@@ -1,14 +1,17 @@
 #include "segmentDisplay.h"
 #include "button.h"
 
+const int pauseMode = 0;
+const int countMode = 1;
+const int lapViewMode = 2;
+
 int number = 0;
 int savedLaps[4];
-int currentLap = 0;
-int indexLap = 0;
+int indexLastLap = 0;
+int indexCurrentLap = 0;
 unsigned long lastIncrement = 0;
 const int incrementPeriod = 100;
-bool pauseMode = true;
-bool lapViewMode = false;
+int currentMode = pauseMode;
 
 void setup() {
     // Initialize the shift register pins and the display control pins
@@ -35,36 +38,35 @@ void count() {
 }
 
 void handleStartButton() {
-    pauseMode = !pauseMode;
-    if (lapViewMode) {
+    if (currentMode == lapViewMode) {
         number = 0;
-        lapViewMode = false;
     }
+    currentMode = currentMode != countMode ? countMode : pauseMode;
 }
 
 void handleResetButton() {
-    if (lapViewMode) {
-        currentLap = 0;
-        indexLap = 0;
+    if (currentMode == lapViewMode) {
+        indexLastLap = 0;
+        indexCurrentLap = 0;
         for (int i = 0; i < 4; i++)
             savedLaps[i] = 0;
     }
 
-    if (pauseMode) {
-        number = 0;
-        lapViewMode = true;
-    } 
-}
-
-void handleSaveButton() {
-    if (!pauseMode) {
-        savedLaps[currentLap % 4] = number;
-        currentLap++;
+    if (currentMode == pauseMode) {
+        currentMode = lapViewMode;
     }
 
-    if (lapViewMode && currentLap != 0) {
-        number = savedLaps[indexLap % min(4, currentLap)];
-        indexLap++;
+    number = 0;
+}
+
+void handleSaveButton(bool longPress) {
+    if (currentMode == countMode && longPress == false) {
+        savedLaps[indexLastLap % 4] = number;
+        indexLastLap++;
+    }
+    if (currentMode == lapViewMode && indexLastLap != 0) {
+       number = savedLaps[indexCurrentLap % min(4, indexLastLap)];
+       indexCurrentLap++;
     }
 }
 
@@ -79,10 +81,14 @@ void loop() {
     }
 
     if (buttonIsPressed(save)) {
-        handleSaveButton();
+        handleSaveButton(false);
     }
 
-    if (pauseMode == false) {
+    if (buttonIsPressedLong(save)) {
+        handleSaveButton(true);
+    }
+
+    if (currentMode == countMode) {
         count();
     }
 

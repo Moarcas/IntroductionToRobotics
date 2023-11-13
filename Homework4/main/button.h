@@ -10,6 +10,7 @@ const int save = 2;
 const int buttonPin[nrButtons] = {8, 3, 2};
 
 const int debounceDelay = 50;
+const int longPressPeriod = 1000;
 
 extern int lastButtonValueRead[nrButtons];
 
@@ -18,5 +19,7 @@ extern int buttonState[nrButtons];
 extern unsigned long timeLastChangeButton[nrButtons];
 
 bool buttonIsPressed(const int pin);
+
+bool buttonIsPressedLong(const int pin);
 
 #endif
