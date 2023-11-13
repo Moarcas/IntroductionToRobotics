@@ -112,7 +112,75 @@ This is a repository of my solutions to Robotics laboratory homeworks, taken in 
     <img src="https://img.youtube.com/vi/SJGTRuJBMLk/maxresdefault.jpg" alt="Watch the video">
   </a>
 </p>
-  </details>
+</details>
+
+<details>
+  <summary>
+    Homework4 - Stopwatch Timer
+  </summary>
+  
+<h1 align="center">Homework4 - Stopwatch Timer</h1>
+
+<p align="center">
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework4/homework4.jpg" alt="Stopwatch photo">
+</p>
+
+<h2 align="center">General description:</h2>
+
+<p align="center">
+  Using the 4 digit 7 segment display and 3 buttons,
+  you should implement a stopwatch timer that counts in 10ths of a second
+  and has a save lap functionality (similar to most basic stopwatch functions
+  on most phones).
+</p>
+
+<h2 align="center">Components</h2>
+
+- 1 x 7-segment display
+- 1 x joystick
+- Resistors and wires as needed
+- 1 7-segment display
+- 3 buttons
+- Resistors and wires as needed 
+
+<h2 align="center">Technical Task</h2>
+
+ The starting value of the 4 digit 7 segment display should
+be ”000.0”. Your buttons should have the following functionalities:
+- Button 1: Start / pause.
+- Button 2: Reset (if in pause mode). Reset saved laps (if in lap
+viewing mode).
+- Button 3: Save lap (if in counting mode), cycle through last saved
+laps (up to 4 laps).
+
+<h2 align="center">Workflow</h2>
+
+- Display shows ”000.0”. When pressing the Start button, the timer
+should start.
+- During timer counter, each time you press the lap button, you should
+save that timer’s value in memory (not persistent, it is OK to be
+deleted upon reset), up to 4 laps (or more if you want); pressing the
+5th time should override the 1st saved one. If you press the reset
+button while timer works, nothing happens. If you press the pause
+button, the timer stops.
+- In Pause Mode, the lap flag button doesn’t work anymore. Pressing
+the reset button resets you to 000.0.
+- After reset, you can now press the flag buttons to cycle through the
+lap times. Each time you press the flag button, it takes you to the
+next saved lap. Pressing it continuously should cycle you through it
+continuously. Pressing the reset button while in this state resets all
+your flags and takes the timer back to ”000.0”.
+
+<h2 align="center">Video</h2>
+
+<p align="center">
+  <a href="https://youtu.be/yDzoy57wTEM">
+    <img src="https://img.youtube.com/vi/yDzoy57wTEM/maxresdefault.jpg" alt="Watch the video">
+  </a>
+</p>
+
+</details>
+
   
 
 
