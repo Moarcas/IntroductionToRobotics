@@ -8,6 +8,7 @@ int indexLap = 0;
 unsigned long lastIncrement = 0;
 const int incrementPeriod = 100;
 bool pauseMode = true;
+bool lapViewMode = false;
 
 void setup() {
     // Initialize the shift register pins and the display control pins
@@ -33,26 +34,52 @@ void count() {
     }
 }
 
+void handleStartButton() {
+    pauseMode = !pauseMode;
+    if (lapViewMode) {
+        number = 0;
+        lapViewMode = false;
+    }
+}
+
+void handleResetButton() {
+    if (lapViewMode) {
+        currentLap = 0;
+        indexLap = 0;
+        for (int i = 0; i < 4; i++)
+            savedLaps[i] = 0;
+    }
+
+    if (pauseMode) {
+        number = 0;
+        lapViewMode = true;
+    } 
+}
+
+void handleSaveButton() {
+    if (!pauseMode) {
+        savedLaps[currentLap % 4] = number;
+        currentLap++;
+    }
+
+    if (lapViewMode && currentLap != 0) {
+        number = savedLaps[indexLap % min(4, currentLap)];
+        indexLap++;
+    }
+}
 
 void loop() {
     
     if (buttonIsPressed(start)) {
-        pauseMode = !pauseMode;
+        handleStartButton();
     } 
 
-    if (pauseMode == true && buttonIsPressed(reset)) {
-        number = 0;
-        lastIncrement = millis();
+    if (buttonIsPressed(reset)) {
+        handleResetButton();
     }
 
     if (buttonIsPressed(save)) {
-        if (pauseMode == false) {
-            savedLaps[currentLap % 4] = number; 
-            currentLap++;
-        } else {
-            number = savedLaps[indexLap % 4];
-            indexLap++;
-        }
+        handleSaveButton();
     }
 
     if (pauseMode == false) {
