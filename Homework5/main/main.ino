@@ -9,7 +9,7 @@ int selectedOption;
 
 bool anotherReadingInProcess = false;
 
-bool currentAlertMode = false;
+bool currentAlertState = false;
 
 MenuState currentMenuState = MAIN_MENU;
 
@@ -26,10 +26,12 @@ void setup() {
 
 void loop() {
 
-    currentAlertMode = ultrasonicSensorReadyToStart() && ultrasonicSensorAlert() ? true : currentAlertMode;
-    currentAlertMode = ldrSensorReadyToStart() && ldrSensorAlert() ? true : currentAlertMode;
+    ldrSensorProcessing();
+    ultrasonicSensorProcessing();
 
-    ledChangeAlertMode(currentAlertMode); 
+    currentAlertState = ldrSensorAlert() || ultrasonicSensorAlert();
+
+    ledChangeAlertMode(currentAlertState); 
 
     if (anotherReadingInProcess == false && (selectedOption = getInput()) == -1) 
         return;

@@ -4,7 +4,7 @@
 
 void setupLdrSensor();
 
-int ldrSensorGetValue();
+void ldrSensorProcessing();
 
 void ldrSensorChangeThreshold(int);
 
@@ -14,8 +14,8 @@ int ldrSensorGetThreshold();
 
 int ldrSensorGetSamplingInterval();
 
-bool ldrSensorAlert();
+int ldrSensorGetValue();
 
-bool ldrSensorReadyToStart();
+bool ldrSensorAlert();
 
 #endif

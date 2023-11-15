@@ -2,17 +2,17 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 
+const int ldrSensorValueMemoryAddress = 30;
 const int thresholdMemoryAddress = 16;
 const int samplingIntervalMemoryAddress = 18;
 const int ldrPin = A0;
-static unsigned long lastTimeStart;
+static unsigned long lastTimeRead;
 
 void setupLdrSensor() {
     pinMode(ldrPin, INPUT);
 }
 
-int ldrSensorGetValue() {
-    lastTimeStart = millis();
+int ldrSensorReadValue() {
     return analogRead(ldrPin);
 }
 
@@ -22,6 +22,27 @@ void ldrSensorChangeThreshold(int newThreshold) {
 
 void ldrSensorChangeSamplingInterval(int newSamplingInterval) {
     EEPROM.put(samplingIntervalMemoryAddress, newSamplingInterval);
+}
+
+bool ldrSensorAlert() {
+    return ldrSensorGetValue() > ldrSensorGetThreshold();
+}
+
+bool ldrSensorReadyToStart() {
+    return (millis() - lastTimeRead) > (ldrSensorGetSamplingInterval() * 1000);
+}
+
+void ldrSensorProcessing() {
+    if (ldrSensorReadyToStart()) {
+        EEPROM.put(ldrSensorValueMemoryAddress, ldrSensorReadValue());
+        lastTimeRead = millis();
+    }
+}
+
+int ldrSensorGetValue() {
+    int ldrSensorValue;
+    EEPROM.get(ldrSensorValueMemoryAddress, ldrSensorValue);
+    return ldrSensorValue;
 }
 
 int ldrSensorGetThreshold() {
@@ -34,16 +55,4 @@ int ldrSensorGetSamplingInterval() {
     int samplingInterval;
     EEPROM.get(samplingIntervalMemoryAddress, samplingInterval);
     return samplingInterval;
-}
-
-bool ldrSensorAlert() {
-    return ldrSensorGetValue() > ldrSensorGetThreshold();
-}
-
-bool ldrSensorReadyToStart() {
-    return (millis() - lastTimeStart) > (ldrSensorGetSamplingInterval() * 1000);
-}
-
-void ldrSensorPrintReading() {
-    
 }

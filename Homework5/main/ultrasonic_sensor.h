@@ -4,7 +4,7 @@
 
 void setupUltrasonicSensor();
 
-int ultrasonicSensorGetValue();
+void ultrasonicSensorProcessing();
 
 void ultrasonicSensorChangeThreshold(int);
 
@@ -14,8 +14,8 @@ int ultrasonicSensorGetThreshold();
 
 int ultrasonicSensorGetSamplingInterval();
 
-bool ultrasonicSensorAlert();
+int ultrasonicSensorGetValue();
 
-bool ultrasonicSensorReadyToStart();
+bool ultrasonicSensorAlert();
 
 #endif
