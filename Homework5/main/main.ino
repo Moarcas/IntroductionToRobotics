@@ -1,20 +1,35 @@
 #include <EEPROM.h> 
 #include "menu.h"
 #include "input_utils.h"
+#include "led.h"
+#include "ldr_sensor.h"
+#include "ultrasonic_sensor.h"
 
 int selectedOption;
 
 bool anotherReadingInProcess = false;
 
+bool currentAlertMode = false;
+
 MenuState currentMenuState = MAIN_MENU;
 
 void setup() {
     Serial.begin(9600); 
+
+    setupLed();
+    setupLdrSensor();
+    setupUltrasonicSensor();
+
     Serial.println("Welcome Back!");
     showMainMenu(); 
 }
 
 void loop() {
+
+    currentAlertMode = ultrasonicSensorReadyToStart() && ultrasonicSensorAlert() ? true : currentAlertMode;
+    currentAlertMode = ldrSensorReadyToStart() && ldrSensorAlert() ? true : currentAlertMode;
+
+    ledChangeAlertMode(currentAlertMode); 
 
     if (anotherReadingInProcess == false && (selectedOption = getInput()) == -1) 
         return;

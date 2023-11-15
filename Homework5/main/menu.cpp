@@ -1,6 +1,9 @@
 #include "menu.h"
 #include "Arduino.h"
 #include "input_utils.h"
+#include "ldr_sensor.h"
+#include "ultrasonic_sensor.h"
+#include "led.h"
 
 void showMainMenu() {
   Serial.println("Main Menu");
@@ -168,10 +171,10 @@ int changeSensorSamplingInterval(MenuState currentMenuState) {
 
     if (sensorRate != -1) {
         if (currentMenuState == ULTRASONIC_SENSOR_SAMPLING_INTERVAL) {
-            // TODO
+            ultrasonicSensorChangeSamplingInterval(sensorRate);
         }
         if (currentMenuState == LDR_SAMPLING_INTERVAL) {
-            // TODO
+            ldrSensorChangeSamplingInterval(sensorRate);
         }
         successfulRateChangeMessage(sensorRate);
         anotherReadingInProcess = false;
@@ -183,17 +186,17 @@ int changeSensorSamplingInterval(MenuState currentMenuState) {
 int changeAlertThreshold(MenuState currentMenuState) {
     if (!anotherReadingInProcess) {
         anotherReadingInProcess = true;
-        Serial.println("    Enter a value between 1 and 100");
+        Serial.println("    Enter a value between 1 and 300");
     }
 
-    int newThreshold = getInput(1, 100);
+    int newThreshold = getInput(1, 300);
 
     if (newThreshold != -1) {
-        if (currentMenuState == ULTRASONIC_SENSOR_SAMPLING_INTERVAL) {
-            // TODO
+        if (currentMenuState == ULTRASONIC_SENSOR_ALERT_THRESHOLD) {
+            ultrasonicSensorChangeThreshold(newThreshold);
         }
-        if (currentMenuState == LDR_SAMPLING_INTERVAL) {
-            // TODO
+        if (currentMenuState == LDR_ALERT_THRESHOLD) {
+            ldrSensorChangeThreshold(newThreshold);
         }
         successfulThresholdChangeMessage(newThreshold);
         anotherReadingInProcess = false;
@@ -242,6 +245,8 @@ int showCurrentSensorReadings() {
     }
 
     //printSensorReading();
+    Serial.print("LDR Sensor Value: ");
+    Serial.println(ldrSensorGetValue());
    
     if (getInput(0, 0) != -1) { // exit when 1 is pressed
         anotherReadingInProcess = false;
@@ -252,46 +257,45 @@ int showCurrentSensorReadings() {
 
 void showCurrentSensorSettings() {
     Serial.print("    Ultrasonic sampling rate: ");
-    Serial.println();   //TODO
+    Serial.println(ultrasonicSensorGetSamplingInterval());
     Serial.print("    Ultrasonic threshold: ");
-    Serial.println();   //TODO
+    Serial.println(ultrasonicSensorGetThreshold());
     Serial.print("    LDR sampling rate: ");
-    Serial.println();
+    Serial.println(ldrSensorGetSamplingInterval());
     Serial.print("    LDR threshold: ");
-    Serial.println();
+    Serial.println(ldrSensorGetThreshold());
 
 }
 
 int changeLedColors() {
-    static bool redIsSet = false;
-    static bool greenIsSet = false;
-    static bool blueIsSet = false;
+    int intensity;
+    static int redIntensity = -1;
+    static int greenIntensity = -1;
+    static int blueIntensity = -1;
     if (!anotherReadingInProcess) {
         anotherReadingInProcess = true;
-        redIsSet = false;
-        greenIsSet = false;
-        blueIsSet = false;
+        redIntensity = -1;
+        greenIntensity = -1;
+        blueIntensity = -1;
         Serial.println("    Each value must be between 0 and 255!");
         Serial.println("    Enter red color value");
     }
 
-    if (getInput(0, 255) != -1) {
-        if (!redIsSet) {
-            redIsSet = true;
-            // TODO set value for red
+    if ((intensity = getInput(0, 255)) != -1) {
+        if (redIntensity == -1) {
+            redIntensity = intensity;
             Serial.println("    ->The red color value has been successfully set");
             Serial.println("    Enter green color value");
             return 0;
         }
-        if (!greenIsSet) {
-            greenIsSet = true;
-            // TODO set green color
+        if (greenIntensity == -1) {
+            greenIntensity = intensity;
             Serial.println("    ->The green color value has been successfully set");
             Serial.println("    Enter blue color value");
             return 0;
         }
-        blueIsSet = true;
-        // TODO set blue color
+        blueIntensity = intensity;
+        updateColors(redIntensity, greenIntensity, blueIntensity);
         Serial.println("    ->The blue color value has been successfully set");
         anotherReadingInProcess = false;
         return 1;
@@ -313,10 +317,10 @@ int toggleLedAutomaticMode() {
         return 0;
 
     if (option == 1) {
-        // TODO: turn on automatic mode
+        changeAutomaticMode(true);
         Serial.println("    -> Automatic mode has been set ON successfully");
     } else {
-        // TODO: turn off automatic mode
+        changeAutomaticMode(false);
         Serial.println("    -> Automatic mode has been set OFF successfully");
     }
     anotherReadingInProcess = false;
