@@ -31,17 +31,15 @@ void showResetLoggedDataMenu() {
 void showSystemStatusMenu() {
     Serial.println("    System Status Menu");
     Serial.println("    1. Current Sensor Readings");
-    Serial.println("    2. Display Logged Data");
-    Serial.println("    3. System Health");
-    Serial.println("    4. Back");
+    Serial.println("    2. Current Sensor Settings");
+    Serial.println("    3. Back");
 }
 
 void showRgbLedControlMenu() {
     Serial.println("    RGB LED Control Menu");
-    Serial.println("    1. Set Red Value");
-    Serial.println("    2. Set Green Value");
-    Serial.println("    3. Set Blue Value");
-    Serial.println("    4. Back");
+    Serial.println("    1. Set Automatic Mode ON/OFF");
+    Serial.println("    2. Color Control");
+    Serial.println("    3. Back");
 }
 
 MenuState nextStateFromMainMenu(int option) {
@@ -117,12 +115,9 @@ MenuState nextStateFromSystemStatus(int option) {
             nextState = CURRENT_SENSOR_READINGS;
             break;
         case 2:
-            nextState = DISPLAY_LOGGED_DATA;
+            nextState = CURRENT_SENSOR_SETTINGS;
             break;
         case 3:
-            nextState = SYSTEM_HEALTH;
-            break;
-        case 4:
             nextState = MAIN_MENU;
             break;
         default:
@@ -136,15 +131,12 @@ MenuState nextStateFromRgbLedControl(int option) {
     MenuState nextState = RESET_LOGGED_DATA;
     switch (option) {
         case 1:
-            nextState = SET_RED_VALUE;
+            nextState = AUTOMATIC_MODE;
             break;
         case 2:
-            nextState = SET_GREEN_VALUE;
+            nextState = COLOR_CONTROL;
             break;
         case 3:
-            nextState = SET_BLUE_VALUE;
-            break;
-        case 4:
             nextState = MAIN_MENU;
             break;
         default:
@@ -155,13 +147,17 @@ MenuState nextStateFromRgbLedControl(int option) {
 }
 
 void successfulRateChangeMessage(int rate) {
-    Serial.print("      Sampling interval was changed to ");
+    Serial.print("      ->Sampling interval was changed to ");
     Serial.println(rate);
 }
 
 void successfulThresholdChangeMessage(int threshold) {
-    Serial.print("      Threshold was changed to ");
+    Serial.print("      ->Threshold was changed to ");
     Serial.println(threshold);
+}
+
+void successfulResetMessage() {
+    Serial.println("    ->The sensor has been successfully reset");
 }
 
 int changeSensorSamplingInterval(MenuState currentMenuState) {
@@ -206,4 +202,125 @@ int changeAlertThreshold(MenuState currentMenuState) {
         return 1;
     }
     return 0;
+}
+
+int resetSensor(MenuState currentMenuState) {
+    if (!anotherReadingInProcess) {
+        anotherReadingInProcess = true;
+        Serial.println("    Are you sure?");
+        Serial.println("    1. Yes");
+        Serial.println("    2. No");
+    }
+
+    int option = getInput(&inputString, 1, 2);
+
+    if (option == 2) {
+        anotherReadingInProcess = false;
+        return 1;
+    }
+
+    if (option == 1) {
+        if (currentMenuState == ULTRASONIC_RESET) {
+            // TODO
+        }
+        if (currentMenuState == LDR_RESET) {
+            // TODO
+        }
+        successfulResetMessage();
+        anotherReadingInProcess = false;
+        return 1;
+    }
+    return 0;
+};
+
+int showCurrentSensorReadings() {
+    if (!anotherReadingInProcess) {
+        anotherReadingInProcess = true;
+        Serial.println("    Showing Sensor Readings");
+        Serial.println("    Press 0 to quit.");
+        // TODO
+        // - get samping rate
+        // - save start time
+    }
+
+    //printSensorReading();
+   
+    if (getInput(&inputString, 0, 0) != -1) { // exit when 1 is pressed
+        anotherReadingInProcess = false;
+        return 1;
+    } 
+    return 0;
+}
+
+void showCurrentSensorSettings() {
+    Serial.print("    Ultrasonic sampling rate: ");
+    Serial.println();   //TODO
+    Serial.print("    Ultrasonic threshold: ");
+    Serial.println();   //TODO
+    Serial.print("    LDR sampling rate: ");
+    Serial.println();
+    Serial.print("    LDR threshold: ");
+    Serial.println();
+
+}
+
+int changeLedColors() {
+    static bool redIsSet = false;
+    static bool greenIsSet = false;
+    static bool blueIsSet = false;
+    if (!anotherReadingInProcess) {
+        anotherReadingInProcess = true;
+        redIsSet = false;
+        greenIsSet = false;
+        blueIsSet = false;
+        Serial.println("    Each value must be between 0 and 255!");
+        Serial.println("    Enter red color value");
+    }
+
+    if (getInput(&inputString, 0, 255) != -1) {
+        if (!redIsSet) {
+            redIsSet = true;
+            // TODO set value for red
+            Serial.println("    ->The red color value has been successfully set");
+            Serial.println("    Enter green color value");
+            return 0;
+        }
+        if (!greenIsSet) {
+            greenIsSet = true;
+            // TODO set green color
+            Serial.println("    ->The green color value has been successfully set");
+            Serial.println("    Enter blue color value");
+            return 0;
+        }
+        blueIsSet = true;
+        // TODO set blue color
+        Serial.println("    ->The blue color value has been successfully set");
+        anotherReadingInProcess = false;
+        return 1;
+    }
+    return 0;
+}
+
+int toggleLedAutomaticMode() {
+    if (!anotherReadingInProcess) {
+        anotherReadingInProcess = true;
+        Serial.println("    Select Automatic Mode");
+        Serial.println("    1. ON");
+        Serial.println("    2. OFF");
+    }
+
+    int option = getInput(&inputString, 1, 2);
+
+    if (option == -1)
+        return 0;
+
+    if (option == 1) {
+        // TODO: turn on automatic mode
+        Serial.println("    -> Automatic mode has been set ON successfully");
+    } else {
+        // TODO: turn off automatic mode
+        Serial.println("    -> Automatic mode has been set OFF successfully");
+    }
+    anotherReadingInProcess = false;
+    return 1;
 }

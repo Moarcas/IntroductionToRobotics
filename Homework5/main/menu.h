@@ -15,12 +15,14 @@ enum MenuState {
             LDR_RESET,
         SYSTEM_STATUS,
             CURRENT_SENSOR_READINGS,
-            DISPLAY_LOGGED_DATA,
-            SYSTEM_HEALTH,
+            CURRENT_SENSOR_SETTINGS,
+            //SYSTEM_HEALTH,
         RGB_LED_CONTROL,
-            SET_RED_VALUE,
-            SET_GREEN_VALUE,
-            SET_BLUE_VALUE,
+            AUTOMATIC_MODE,
+            COLOR_CONTROL,
+                //SET_RED_VALUE,
+                //SET_GREEN_VALUE,
+                //SET_BLUE_VALUE,
 };
 
 extern MenuState currentMenuState;
@@ -31,13 +33,18 @@ void showResetLoggedDataMenu();
 void showSystemStatusMenu();
 void showRgbLedControlMenu();
 
-int changeSensorSamplingInterval(MenuState currentMenuState);
-int changeAlertThreshold(MenuState currentMenuState);
-
 MenuState nextStateFromMainMenu(int option);
 MenuState nextStateFromSensorSettingsMenu(int option);
 MenuState nextStateFromResetLoggedData(int option);
 MenuState nextStateFromSystemStatus(int option);
 MenuState nextStateFromRgbLedControl(int option);
+
+int changeSensorSamplingInterval(MenuState currentMenuState);
+int changeAlertThreshold(MenuState currentMenuState);
+int resetSensor(MenuState currentMenuState);
+int showCurrentSensorReadings();
+int changeLedColors();
+int toggleLedAutomaticMode();
+void showCurrentSensorSettings();
 
 #endif

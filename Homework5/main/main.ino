@@ -21,8 +21,6 @@ void loop() {
     if (anotherReadingInProcess == false && (selectedOption = getInput(&inputStringMenu)) == -1)  // Invalid input
         return;
 
-    inputStringMenu = "";
-    
     switch (currentMenuState) {
         case MAIN_MENU:
             currentMenuState = nextStateFromMainMenu(selectedOption);
@@ -58,27 +56,47 @@ void loop() {
             showRgbLedControlMenu();
             break;
         case ULTRASONIC_SENSOR_SAMPLING_INTERVAL:
-            if (changeSensorSamplingInterval(currentMenuState) == 1) {
+        case LDR_SAMPLING_INTERVAL:
+            if (changeSensorSamplingInterval(currentMenuState)) {
                 showSensorSettingsMenu();
                 currentMenuState = SENSOR_SETTINGS;
             }
             break;
         case ULTRASONIC_SENSOR_ALERT_THRESHOLD:
-            if (changeAlertThreshold(currentMenuState) == 1) {
-                showSensorSettingsMenu();
-                currentMenuState = SENSOR_SETTINGS;
-            }
-            break;
-        case LDR_SAMPLING_INTERVAL:
-            if (changeSensorSamplingInterval(currentMenuState) == 1) {
-                showSensorSettingsMenu();
-                currentMenuState = SENSOR_SETTINGS;
-            }
-            break;
         case LDR_ALERT_THRESHOLD:
-            if (changeAlertThreshold(currentMenuState) == 1) {
+            if (changeAlertThreshold(currentMenuState)) {
                 showSensorSettingsMenu();
                 currentMenuState = SENSOR_SETTINGS;
+            }
+            break;
+        case ULTRASONIC_RESET:
+        case LDR_RESET:
+            if (resetSensor(currentMenuState)) {
+                showResetLoggedDataMenu();
+                currentMenuState = RESET_LOGGED_DATA;
+            }
+            break;
+        case CURRENT_SENSOR_READINGS:
+            if (showCurrentSensorReadings()) {
+                showSystemStatusMenu();
+                currentMenuState = SYSTEM_STATUS;
+            }
+            break;
+        case CURRENT_SENSOR_SETTINGS:
+            showCurrentSensorSettings();
+            showSystemStatusMenu();
+            currentMenuState = SYSTEM_STATUS;
+            break;
+        case AUTOMATIC_MODE:
+            if (toggleLedAutomaticMode()) {
+                showRgbLedControlMenu();
+                currentMenuState = RGB_LED_CONTROL;
+            }
+            break;
+        case COLOR_CONTROL:
+            if (changeLedColors()) {
+                showRgbLedControlMenu();
+                currentMenuState = RGB_LED_CONTROL;
             }
             break;
         default:
