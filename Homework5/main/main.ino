@@ -6,8 +6,6 @@ int selectedOption;
 
 bool anotherReadingInProcess = false;
 
-String inputStringMenu = "";
-
 MenuState currentMenuState = MAIN_MENU;
 
 void setup() {
@@ -18,7 +16,7 @@ void setup() {
 
 void loop() {
 
-    if (anotherReadingInProcess == false && (selectedOption = getInput(&inputStringMenu)) == -1)  // Invalid input
+    if (anotherReadingInProcess == false && (selectedOption = getInput()) == -1) 
         return;
 
     switch (currentMenuState) {

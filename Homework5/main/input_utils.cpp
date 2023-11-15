@@ -16,21 +16,22 @@ bool isValid(String inputString, int minValue, int maxValue) {
     return true;
 }
 
-int getInput(String* inputString, int minValue, int maxValue) {
+int getInput(int minValue, int maxValue) {
+    static String inputString = "";
     if (Serial.available() > 0) {
         char valueRead = char(Serial.read());  
 
         if (valueRead == '\n') {
-            if (!isValid(*inputString, minValue, maxValue)) {
+            if (!isValid(inputString, minValue, maxValue)) {
                 showInputException();
-                *inputString = "";
+                inputString = "";
                 return -1;
             }
-            int number = atoi(inputString->c_str());
-            *inputString = "";
+            int number = atoi(inputString.c_str());
+            inputString = "";
             return number;
         }
-        *inputString += valueRead;
+        inputString += valueRead;
     }
     return -1;
 }

@@ -2,8 +2,6 @@
 #include "Arduino.h"
 #include "input_utils.h"
 
-String inputString = "";
-
 void showMainMenu() {
   Serial.println("Main Menu");
   Serial.println("1. Sensor Settings");
@@ -166,7 +164,7 @@ int changeSensorSamplingInterval(MenuState currentMenuState) {
         Serial.println("    Enter a value between 1 and 10"); 
     }
 
-    int sensorRate = getInput(&inputString, 1, 10);
+    int sensorRate = getInput(1, 10);
 
     if (sensorRate != -1) {
         if (currentMenuState == ULTRASONIC_SENSOR_SAMPLING_INTERVAL) {
@@ -188,7 +186,7 @@ int changeAlertThreshold(MenuState currentMenuState) {
         Serial.println("    Enter a value between 1 and 100");
     }
 
-    int newThreshold = getInput(&inputString, 1, 100);
+    int newThreshold = getInput(1, 100);
 
     if (newThreshold != -1) {
         if (currentMenuState == ULTRASONIC_SENSOR_SAMPLING_INTERVAL) {
@@ -212,7 +210,7 @@ int resetSensor(MenuState currentMenuState) {
         Serial.println("    2. No");
     }
 
-    int option = getInput(&inputString, 1, 2);
+    int option = getInput(1, 2);
 
     if (option == 2) {
         anotherReadingInProcess = false;
@@ -245,7 +243,7 @@ int showCurrentSensorReadings() {
 
     //printSensorReading();
    
-    if (getInput(&inputString, 0, 0) != -1) { // exit when 1 is pressed
+    if (getInput(0, 0) != -1) { // exit when 1 is pressed
         anotherReadingInProcess = false;
         return 1;
     } 
@@ -277,7 +275,7 @@ int changeLedColors() {
         Serial.println("    Enter red color value");
     }
 
-    if (getInput(&inputString, 0, 255) != -1) {
+    if (getInput(0, 255) != -1) {
         if (!redIsSet) {
             redIsSet = true;
             // TODO set value for red
@@ -309,7 +307,7 @@ int toggleLedAutomaticMode() {
         Serial.println("    2. OFF");
     }
 
-    int option = getInput(&inputString, 1, 2);
+    int option = getInput(1, 2);
 
     if (option == -1)
         return 0;
