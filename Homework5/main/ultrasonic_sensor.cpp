@@ -9,6 +9,7 @@ const int ldrPin = A0;
 const int trigPin = 6;
 const int echoPin = 5;
 static unsigned long lastTimeRead;
+static bool showOutput = false;
 
 void setupUltrasonicSensor() {
     pinMode(trigPin, OUTPUT);
@@ -39,6 +40,12 @@ bool ultrasonicSensorReadyToStart() {
 void ultrasonicSensorProcessing() {
     if (ultrasonicSensorReadyToStart()) {
         EEPROM.put(ultrasonicSensorValueMemoryAddress, ultrasonicSensorReadValue());
+    
+        if (showOutput) {
+            Serial.print("      ->Ultrasonic Sensor Value: ");
+            Serial.println(ultrasonicSensorGetValue());
+        }
+            
         lastTimeRead = millis();
     }
 }
@@ -63,5 +70,9 @@ int ultrasonicSensorGetValue() {
 
 bool ultrasonicSensorAlert() {
     return ultrasonicSensorGetValue() > ultrasonicSensorGetThreshold();
+}
+
+void ultrasonicSensorShowOutput(bool show) {
+    showOutput = show;
 }
 

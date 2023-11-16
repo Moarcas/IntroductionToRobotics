@@ -18,4 +18,6 @@ int ldrSensorGetValue();
 
 bool ldrSensorAlert();
 
+void ldrSensorShowOutput(bool show);
+
 #endif

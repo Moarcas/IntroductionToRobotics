@@ -7,6 +7,7 @@ const int thresholdMemoryAddress = 16;
 const int samplingIntervalMemoryAddress = 18;
 const int ldrPin = A0;
 static unsigned long lastTimeRead;
+static bool showOutput = false;
 
 void setupLdrSensor() {
     pinMode(ldrPin, INPUT);
@@ -35,6 +36,12 @@ bool ldrSensorReadyToStart() {
 void ldrSensorProcessing() {
     if (ldrSensorReadyToStart()) {
         EEPROM.put(ldrSensorValueMemoryAddress, ldrSensorReadValue());
+        
+        if (showOutput) {
+            Serial.print("      ->LDR Sensor Value: ");
+            Serial.println(ldrSensorGetValue());
+        }
+
         lastTimeRead = millis();
     }
 }
@@ -55,4 +62,8 @@ int ldrSensorGetSamplingInterval() {
     int samplingInterval;
     EEPROM.get(samplingIntervalMemoryAddress, samplingInterval);
     return samplingInterval;
+}
+
+void ldrSensorShowOutput(bool show) {
+    showOutput = show;
 }

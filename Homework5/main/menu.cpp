@@ -235,30 +235,18 @@ int resetSensor(MenuState currentMenuState) {
 };
 
 int showCurrentSensorReadings() {
-    static int ldrSensorCurrentValue = ldrSensorGetValue();
-    static int ultrasonicSensorCurrentValue = ldrSensorGetValue();
     if (!anotherReadingInProcess) {
         anotherReadingInProcess = true;
         Serial.println("    Showing Sensor Readings");
         Serial.println("    Press 0 to quit.");
+        ldrSensorShowOutput(true);
+        ultrasonicSensorShowOutput(true);
     }
 
-    int ldrSensorNewValue = ldrSensorGetValue();
-    if (ldrSensorNewValue != ldrSensorCurrentValue) {
-        Serial.print("LDR Sensor Value: ");
-        Serial.println(ldrSensorNewValue);
-        ldrSensorCurrentValue = ldrSensorNewValue;
-    }
-
-    int ultrasonicSensorNewValue = ultrasonicSensorGetValue();
-    if (ultrasonicSensorNewValue != ultrasonicSensorCurrentValue) {
-        Serial.print("Ultrasonic Sensor Value: ");
-        Serial.println(ultrasonicSensorNewValue);
-        ultrasonicSensorCurrentValue = ultrasonicSensorNewValue;
-    }
-   
-    if (getInput(0, 0) != -1) { // exit when 1 is pressed
+    if (getInput(0, 0) != -1) { // exit when 0 is pressed
         anotherReadingInProcess = false;
+        ldrSensorShowOutput(false);
+        ultrasonicSensorShowOutput(false);
         return 1;
     } 
     return 0;

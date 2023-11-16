@@ -18,4 +18,6 @@ int ultrasonicSensorGetValue();
 
 bool ultrasonicSensorAlert();
 
+void ultrasonicSensorShowOutput(bool show);
+
 #endif
