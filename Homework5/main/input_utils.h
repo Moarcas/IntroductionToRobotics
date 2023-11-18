@@ -6,6 +6,8 @@ void showInputException();
 
 int getInput(int minValue = 0, int maxValue = 1000);
 
+void changeIrMode(bool infrared);
+
 extern bool anotherReadingInProcess;
 
 #endif

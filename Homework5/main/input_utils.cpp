@@ -1,6 +1,8 @@
 #include "input_utils.h"
 #include "Arduino.h"
 
+bool infraredMode;
+
 void showInputException() {
     Serial.println("Invalid option. Please try again");
 }
@@ -34,4 +36,8 @@ int getInput(int minValue, int maxValue) {
         inputString += valueRead;
     }
     return -1;
+}
+
+void changeIrMode(bool infrared) {
+    infraredMode = infrared;
 }

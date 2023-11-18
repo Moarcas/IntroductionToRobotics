@@ -11,6 +11,7 @@ void showMainMenu() {
   Serial.println("2. Reset Logged Data");
   Serial.println("3. System Status");
   Serial.println("4. RGB LED Control");
+  Serial.println("5. Infrared Control");
 }
 
 void showSensorSettingsMenu() {
@@ -45,6 +46,7 @@ void showRgbLedControlMenu() {
 }
 
 MenuState nextStateFromMainMenu(int option) {
+    Serial.println(option);
     MenuState nextState = MAIN_MENU;
     switch (option) {
         case 1:
@@ -58,6 +60,9 @@ MenuState nextStateFromMainMenu(int option) {
             break;
         case 4:
             nextState = RGB_LED_CONTROL;
+            break;
+        case 5: 
+            nextState = IR_CONTROL;
             break;
         default:    
             showInputException();
@@ -189,6 +194,12 @@ void processMenuStateTransition(MenuState& currentMenuState) {
             break;
         case RGB_LED_CONTROL:
             showRgbLedControlMenu();
+            break;
+        case IR_CONTROL:
+            if (changeIrControl()) {
+                showMainMenu();
+                currentMenuState = MAIN_MENU;
+            }
             break;
         case ULTRASONIC_SENSOR_SAMPLING_INTERVAL:
         case LDR_SAMPLING_INTERVAL:
@@ -420,6 +431,30 @@ int toggleLedAutomaticMode() {
     } else {
         changeAutomaticMode(false);
         Serial.println("    -> Automatic mode has been set OFF successfully");
+    }
+    anotherReadingInProcess = false;
+    return 1;
+}
+
+int changeIrControl() {
+    if (!anotherReadingInProcess) {
+        anotherReadingInProcess = true;
+        Serial.println("    Select the desired input mode:");
+        Serial.println("    1. Keyboard");
+        Serial.println("    2. Infrared Remote");
+    }
+
+    int option = getInput(1, 2);
+
+    if (option == -1) 
+        return 0;
+
+    if (option == 1) {
+        changeIrMode(false);
+        Serial.println("    -> Switched to Keyboard input mode");
+    } else {
+        changeIrMode(true);
+        Serial.println("    -> Switched to Infrared Remote input mode");
     }
     anotherReadingInProcess = false;
     return 1;

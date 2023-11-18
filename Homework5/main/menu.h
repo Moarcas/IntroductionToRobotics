@@ -20,6 +20,8 @@ enum MenuState {
         RGB_LED_CONTROL,
             AUTOMATIC_MODE,
             COLOR_CONTROL,
+        IR_CONTROL
+
 };
 
 extern MenuState currentMenuState;
@@ -47,5 +49,6 @@ int changeLedColors();
 int toggleLedAutomaticMode();
 void showCurrentSensorSettings();
 void showLoggedData();
+int changeIrControl();
 
 #endif
