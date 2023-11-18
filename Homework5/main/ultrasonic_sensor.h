@@ -20,4 +20,8 @@ bool ultrasonicSensorAlert();
 
 void ultrasonicSensorShowOutput(bool show);
 
+void ultrasonicSensorShowLoggedData();
+
+void ultrasonicSensorReset();
+
 #endif

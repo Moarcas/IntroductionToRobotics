@@ -33,7 +33,8 @@ void showSystemStatusMenu() {
     Serial.println("    System Status Menu");
     Serial.println("    1. Current Sensor Readings");
     Serial.println("    2. Current Sensor Settings");
-    Serial.println("    3. Back");
+    Serial.println("    3. Display Logged Data");
+    Serial.println("    4. Back");
 }
 
 void showRgbLedControlMenu() {
@@ -119,6 +120,9 @@ MenuState nextStateFromSystemStatus(int option) {
             nextState = CURRENT_SENSOR_SETTINGS;
             break;
         case 3:
+            nextState = DISPLAY_LOGGED_DATA;
+            break;
+        case 4:
             nextState = MAIN_MENU;
             break;
         default:
@@ -145,6 +149,99 @@ MenuState nextStateFromRgbLedControl(int option) {
             break;
     }
     return nextState;
+}
+
+MenuState getNextMenuState(int selectedOption) {
+    int nextMenuState;
+    switch (currentMenuState) {
+        case MAIN_MENU:
+            nextMenuState = nextStateFromMainMenu(selectedOption);
+            break;
+        case SENSOR_SETTINGS:
+            nextMenuState = nextStateFromSensorSettingsMenu(selectedOption);
+            break;
+        case RESET_LOGGED_DATA:
+            nextMenuState = nextStateFromResetLoggedData(selectedOption);
+            break;
+        case SYSTEM_STATUS:
+            nextMenuState = nextStateFromSystemStatus(selectedOption);
+            break;
+        case RGB_LED_CONTROL:
+            nextMenuState = nextStateFromRgbLedControl(selectedOption);
+            break;
+    }
+    return nextMenuState;
+} 
+
+void processMenuStateTransition(MenuState& currentMenuState) {
+    switch (currentMenuState) {
+        case MAIN_MENU:
+            showMainMenu(); 
+            break;
+        case SENSOR_SETTINGS:
+            showSensorSettingsMenu();
+            break;
+        case RESET_LOGGED_DATA:
+            showResetLoggedDataMenu();
+            break;
+        case SYSTEM_STATUS:
+            showSystemStatusMenu();
+            break;
+        case RGB_LED_CONTROL:
+            showRgbLedControlMenu();
+            break;
+        case ULTRASONIC_SENSOR_SAMPLING_INTERVAL:
+        case LDR_SAMPLING_INTERVAL:
+            if (changeSensorSamplingInterval(currentMenuState)) {
+                showSensorSettingsMenu();
+                currentMenuState = SENSOR_SETTINGS;
+            }
+            break;
+        case ULTRASONIC_SENSOR_ALERT_THRESHOLD:
+        case LDR_ALERT_THRESHOLD:
+            if (changeAlertThreshold(currentMenuState)) {
+                showSensorSettingsMenu();
+                currentMenuState = SENSOR_SETTINGS;
+            }
+            break;
+        case ULTRASONIC_RESET:
+        case LDR_RESET:
+            if (resetSensor(currentMenuState)) {
+                showResetLoggedDataMenu();
+                currentMenuState = RESET_LOGGED_DATA;
+            }
+            break;
+        case CURRENT_SENSOR_READINGS:
+            if (showCurrentSensorReadings()) {
+                showSystemStatusMenu();
+                currentMenuState = SYSTEM_STATUS;
+            }
+            break;
+        case CURRENT_SENSOR_SETTINGS:
+            showCurrentSensorSettings();
+            showSystemStatusMenu();
+            currentMenuState = SYSTEM_STATUS;
+            break;
+        case DISPLAY_LOGGED_DATA:
+            showLoggedData();
+            showSystemStatusMenu();
+            currentMenuState = SYSTEM_STATUS;
+            break;
+        case AUTOMATIC_MODE:
+            if (toggleLedAutomaticMode()) {
+                showRgbLedControlMenu();
+                currentMenuState = RGB_LED_CONTROL;
+            }
+            break;
+        case COLOR_CONTROL:
+            if (changeLedColors()) {
+                showRgbLedControlMenu();
+                currentMenuState = RGB_LED_CONTROL;
+            }
+            break;
+        default:
+            Serial.println("Unexpected error");
+    }
 }
 
 void successfulRateChangeMessage(int rate) {
@@ -222,10 +319,10 @@ int resetSensor(MenuState currentMenuState) {
 
     if (option == 1) {
         if (currentMenuState == ULTRASONIC_RESET) {
-            // TODO
+            ultrasonicSensorReset();
         }
         if (currentMenuState == LDR_RESET) {
-            // TODO
+            ldrSensorReset();
         }
         successfulResetMessage();
         anotherReadingInProcess = false;
@@ -261,7 +358,11 @@ void showCurrentSensorSettings() {
     Serial.println(ldrSensorGetSamplingInterval());
     Serial.print("    LDR threshold: ");
     Serial.println(ldrSensorGetThreshold());
+}
 
+void showLoggedData() {
+    ultrasonicSensorShowLoggedData();
+    ldrSensorShowLoggedData();
 }
 
 int changeLedColors() {

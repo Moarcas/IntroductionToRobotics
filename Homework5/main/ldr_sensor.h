@@ -20,4 +20,8 @@ bool ldrSensorAlert();
 
 void ldrSensorShowOutput(bool show);
 
+void ldrSensorShowLoggedData();
+
+void ldrSensorReset();
+
 #endif

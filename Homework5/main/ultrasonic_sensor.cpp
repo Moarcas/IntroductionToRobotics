@@ -2,14 +2,16 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 
-const int ultrasonicSensorValueMemoryAddress = 32;
+const int ultrasonicSensorNumberValuesSaved = 10;
+const int ultrasonicSensorFirstValueMemoryAddress = 100;
 const int thresholdMemoryAddress = 20;
 const int samplingIntervalMemoryAddress = 22;
-const int ldrPin = A0;
 const int trigPin = 6;
 const int echoPin = 5;
+const int intSize = 2;
 static unsigned long lastTimeRead;
 static bool showOutput = false;
+static int indexValueToSave;
 
 void setupUltrasonicSensor() {
     pinMode(trigPin, OUTPUT);
@@ -37,9 +39,17 @@ bool ultrasonicSensorReadyToStart() {
     return (millis() - lastTimeRead) > (ultrasonicSensorGetSamplingInterval() * 1000);
 }
 
+void saveValueInMemory(int value) {
+    int memoryAddress = ultrasonicSensorFirstValueMemoryAddress + indexValueToSave * intSize;
+    indexValueToSave++;
+    EEPROM.put(memoryAddress, value);
+    if (indexValueToSave == ultrasonicSensorNumberValuesSaved) 
+        indexValueToSave = 0;
+}
+
 void ultrasonicSensorProcessing() {
     if (ultrasonicSensorReadyToStart()) {
-        EEPROM.put(ultrasonicSensorValueMemoryAddress, ultrasonicSensorReadValue());
+        saveValueInMemory(ultrasonicSensorReadValue());
     
         if (showOutput) {
             Serial.print("      ->Ultrasonic Sensor Value: ");
@@ -63,8 +73,9 @@ int ultrasonicSensorGetSamplingInterval() {
 }
 
 int ultrasonicSensorGetValue() {
+    int memoryAddress = ultrasonicSensorFirstValueMemoryAddress + ((ultrasonicSensorNumberValuesSaved + indexValueToSave - 1) % ultrasonicSensorNumberValuesSaved) * intSize;
     int ultrasonicSensorValue;
-    EEPROM.get(ultrasonicSensorValueMemoryAddress, ultrasonicSensorValue);
+    EEPROM.get(memoryAddress, ultrasonicSensorValue);
     return ultrasonicSensorValue;
 }
 
@@ -76,3 +87,23 @@ void ultrasonicSensorShowOutput(bool show) {
     showOutput = show;
 }
 
+void ultrasonicSensorShowLoggedData() {
+    int memoryAddress;
+    int ultrasonicSensorValue;
+    Serial.print("    ->Ultrasonic Sensor Logged Data: ");
+    for (int i = 1; i <= ultrasonicSensorNumberValuesSaved; i++) {
+        memoryAddress = ultrasonicSensorFirstValueMemoryAddress + ((ultrasonicSensorNumberValuesSaved - i + indexValueToSave) % ultrasonicSensorNumberValuesSaved) * intSize;
+        EEPROM.get(memoryAddress, ultrasonicSensorValue);
+        Serial.print(ultrasonicSensorValue);
+        Serial.print(" ");
+    }
+    Serial.println();
+}
+
+void ultrasonicSensorReset() {
+    int memoryAddress;
+    for (int i = 0; i < ultrasonicSensorNumberValuesSaved; i++) {
+        memoryAddress = ultrasonicSensorFirstValueMemoryAddress + i * intSize;
+        EEPROM.put(memoryAddress, 0);
+    }
+}
