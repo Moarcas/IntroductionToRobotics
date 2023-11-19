@@ -49,7 +49,7 @@ void ldrSensorProcessing() {
         saveValueToMemory(ldrSensorReadValue());
         
         if (showOutput) {
-            Serial.print("      ->LDR Sensor Value: ");
+            Serial.print(F("      ->LDR Sensor Value: "));
             Serial.println(ldrSensorGetValue());
         }
 
@@ -83,7 +83,7 @@ void ldrSensorShowOutput(bool show) {
 void ldrSensorShowLoggedData() {
     int memoryAddress;
     int ldrSensorValue;
-    Serial.print("    ->Ldr Sensor Logged Data: ");
+    Serial.print(F("    ->Ldr Sensor Logged Data: "));
     for (int i = 1; i <= ldrSensorNumberValuesSaved; i++) {
         memoryAddress = ldrSensorFirstValueMemoryAddress + ((ldrSensorNumberValuesSaved - i + indexValueToSave) % ldrSensorNumberValuesSaved) * intSize;
         EEPROM.get(memoryAddress, ldrSensorValue);

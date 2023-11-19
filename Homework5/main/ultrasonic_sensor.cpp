@@ -52,7 +52,7 @@ void ultrasonicSensorProcessing() {
         saveValueInMemory(ultrasonicSensorReadValue());
     
         if (showOutput) {
-            Serial.print("      ->Ultrasonic Sensor Value: ");
+            Serial.print(F("      ->Ultrasonic Sensor Value: "));
             Serial.println(ultrasonicSensorGetValue());
         }
             
@@ -90,7 +90,7 @@ void ultrasonicSensorShowOutput(bool show) {
 void ultrasonicSensorShowLoggedData() {
     int memoryAddress;
     int ultrasonicSensorValue;
-    Serial.print("    ->Ultrasonic Sensor Logged Data: ");
+    Serial.print(F("    ->Ultrasonic Sensor Logged Data: "));
     for (int i = 1; i <= ultrasonicSensorNumberValuesSaved; i++) {
         memoryAddress = ultrasonicSensorFirstValueMemoryAddress + ((ultrasonicSensorNumberValuesSaved - i + indexValueToSave) % ultrasonicSensorNumberValuesSaved) * intSize;
         EEPROM.get(memoryAddress, ultrasonicSensorValue);

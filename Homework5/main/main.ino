@@ -16,11 +16,12 @@ MenuState currentMenuState = MAIN_MENU;
 void setup() {
     Serial.begin(9600); 
 
+    setupIR();
     setupLed();
     setupLdrSensor();
     setupUltrasonicSensor();
 
-    Serial.println("Welcome Back!");
+    Serial.println(F("Welcome Back!"));
     showMainMenu(); 
 }
 
