@@ -181,6 +181,122 @@ your flags and takes the timer back to ”000.0”.
 
 </details>
 
-  
+<details>
+  <summary>
+    Homework5 - Pseudo-Smart Environment Monitor and Logger
+  </summary>
+
+  <h1>Homework5 - Pseudo-Smart Environment Monitor and Logger</h1>
+
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework5/homework5.jpg" alt="7 Segment Display Photo">
+
+  <h2>General description</h2>
+
+  <p>
+    Develop a "Smart Environment Monitor and Logger" using Arduino. This system will utilize various sensors to gather environmental data, log this data into EEPROM, and provide both visual feedback via an RGB LED and user interaction through a Serial Menu. The project focuses on integrating sensor readings, memory management, Serial Communication, and the general objective of building a menu.
+  </p>
+
+  <h2>Components</h2>
+
+  <ul>
+    <li>Arduino Uno Board</li>
+    <li>Ultrasonic Sensor (HC-SR04)</li>
+    <li>LDR (Light-Dependent Resistor)</li>
+    <li>RGB LED</li>
+    <li>Resistors as needed</li>
+    <li>Breadboard and connecting wires</li>
+  </ul>
+
+  <h2>Menu structure</h2>
+
+  <h3>1. Sensor Settings</h3>
+
+  <ul>
+    <li>
+      <h4>1.1 Sensors Sampling Interval</h4>
+      <p>Prompt for a value between 1 and 10 seconds. Use this value as a sampling rate for the sensors. You can read a separate value for each or have the same for both.</p>
+    </li>
+    <li>
+      <h4>1.2 Ultrasonic Alert Threshold</h4>
+      <p>Prompt for a threshold value for the ultrasonic sensor. You can decide if that is the min or max value. When the sensor value exceeds the threshold value, an alert should be given. If the LED is set to Automatic Mode (see section 4.2), it should also turn red if any of the sensors are outside the value.</p>
+    </li>
+    <li>
+      <h4>1.3 LDR Alert Threshold</h4>
+      <p>Prompt for a threshold value for the LDR sensor. You can decide if that is the min or max value. When the sensor value exceeds the threshold value, an alert should be given. If the LED is set to Automatic Mode (see section 4.2), it should also turn red if any of the sensors are outside the value.</p>
+    </li>
+    <li>
+      <h4>1.4 Back</h4>
+      <p>Return to the main menu</p>
+    </li>
+  </ul>
+
+  <h3>2. Reset Logger Data</h3>
+
+  <ul>
+    <li>
+      <h4>2.1 Yes</h4>
+    </li>
+    <li>
+      <h4>2.2 No</h4>
+    </li>
+  </ul>
+
+  <h3>3. System Status</h3>
+
+  <ul>
+    <li>
+      <h4>3.1 Current Sensor Readings</h4>
+      <p>Continuously print sensor readings at the set sampling rate, from all sensors. Make sure you have a way to exit this (such as pressing a specific key) and inform the user of this method through a message.</p>
+    </li>
+    <li>
+      <h4>3.2 Current Sensor Settings</h4>
+      <p>Displays the sampling rate and threshold value for all sensors.</p>
+    </li>
+    <li>
+      <h4>3.3 Display Logged Data</h4>
+      <p>Displays the last 10 sensor readings for all sensors. (or be creative and do it another way).</p>
+    </li>
+    <li>
+      <h4>3.4 Back</h4>
+      <p>Return to the Main menu.</p>
+    </li>
+  </ul>
+
+  <h3>4. RGB LED Control</h3>
+
+  <ul>
+    <li>
+      <h4>4.1 Manual Color Control</h4>
+      <p>Set the RGB colors manually. You decide how to input them, either by making an option for each channel or by putting a string, etc. If you expect a specific format, make sure to inform the user.</p>
+    </li>
+    <li>
+      <h4>4.2 LED: Toggle Automatic ON/OFF</h4>
+      <p>If automatic mode is ON, then the LED color should be GREEN when all sensors value do not exceed threshold values (aka no alert) and RED when there is an alert (aka ANY sensor value exceeds the threshold). When automatic mode is OFF, then the LED should use the last saved RGB values.</p>
+    </li>
+    <li>
+      <h4>4.3 Back</h4>
+      <p>Return to the main menu</p>
+    </li>
+  </ul>
+
+  <h3>5. IR Control</h3>
+
+  <ul>
+    <li>
+      <h4>5.1 Keyboard input</h4>
+    </li>
+    <li>
+      <h4>5.2 Remote IR input</h4>
+    </li>
+  </ul>
+
+  <h2>Video</h2>
+
+  <p>
+    <a href="https://youtu.be/-WJyd9sFUNk">Watch the video</a>
+  </p>
+
+  <img src="https://img.youtube.com/vi/-WJyd9sFUNk/maxresdefault.jpg" alt="Watch the video">
+</details>
 
 
