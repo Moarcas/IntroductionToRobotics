@@ -7,7 +7,7 @@ const int dinPin = 12;
 const int clockPin = 11;
 const int loadPin = 10;
 LedControl lc = LedControl(dinPin, clockPin, loadPin, 1);
-const int matrixBrightness = 3;
+const int matrixBrightness = 1;
 const int wallProbability = 30;
 
 void setupMatrix() {
