@@ -307,4 +307,55 @@ your flags and takes the timer back to ”000.0”.
   <img src="https://img.youtube.com/vi/TkiGLPZjVf4/maxresdefault.jpg" alt="Watch the video">
 </details>
 
+  <details>
+    <summary>
+       Homework6 - Mini 8x8 LED Matrix game
+    </summary>
+    
+<h1 align="center">Homework6 - Mini 8x8 LED Matrix game</h1>
+
+<p align="center">
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework6/homework6.jpg" alt=" Matrix Game Photo">
+</p>
+
+<h2 align="center">General description:</h2>
+
+<p align="center">
+    I developed a small game on an 8x8 matrix. In the game, I included three types of elements: a player (blinking slowly), bullets (blinking fast), and walls (not blinking). The purpose 
+    of this was to kickstart my matrix project. The basic idea was to generate walls on the map (occupying 50% - 75% of the map), and then I could move around with the player to destroy them. I 
+    implemented it in a Terminator-tanks style.
+</p>
+
+<h2 align="center">Components</h2>
+
+<ul>
+        <li>Arduino Uno Board</li>
+        <li>Joystick</li>
+        <li>8x8 LED Matrix</li>
+        <li>MAX7219</li>
+        <li>Resistors and capacitors as needed</li>
+        <li>Breadboard and connecting wires</li>
+</ul>
+
+<h2 align="center">Joystick Functions</h2>
+
+<ul>
+        <li><strong>Move Up:</strong> Gently push the joystick upwards to navigate the player character upward on the matrix.</li>
+        <li><strong>Move Down:</strong> Similarly, a subtle downward movement of the joystick guides the player character downward within the matrix.</li>
+        <li><strong>Move Left:</strong> Tilt the joystick to the left to smoothly shift the player character horizontally to the left.</li>
+        <li><strong>Move Right:</strong> Conversely, a tilt to the right accomplishes a seamless movement of the player character to the right.</li>
+        <li><strong>Shoot:</strong> Press the joystick to initiate the shooting action, releasing bullets to destroy obstacles and progress in the game.</li>
+</ul>
+
+<p>These responsive joystick controls enhance the gaming experience, providing dynamic and engaging maneuverability for the player.</p>
+
+<h2 align="center">Video</h2>
+
+<p align="center">
+  <a href="https://youtu.be/lzJ52zH16vg">
+    <img src="https://img.youtube.com/vi/lzJ52zH16vg/maxresdefault.jpg" alt="Watch the video">
+  </a>
+</p>
+</details>
+
 
