@@ -1,8 +1,8 @@
 #ifndef BULLET.H
 #define BULLET.H
-#include "matrix.h"
+#include "map.h"
 
-void showBullet(int matrix[matrixSize][matrixSize]);
+void showBullet(int gameMap[mapSize][mapSize]);
 
 void shoot(Position playerPosition, char direction);
 

@@ -1,12 +1,12 @@
 #ifndef PLAYER.H
 #define PLAYER.H
-#include "matrix.h"
+#include "map.h"
 
-void generatePlayerPosition(int matrix[matrixSize][matrixSize]);
+void generatePlayerPosition(int gameMap[mapSize][mapSize]);
 
-void showPlayer(int matrix[matrixSize][matrixSize]);
+void showPlayer(int gameMap[mapSize][mapSize]);
 
-void movePlayer(int matrix[matrixSize][matrixSize], char direction);
+void movePlayer(int gameMap[mapSize][mapSize], char direction);
 
 Position getPlayerPosition();
 

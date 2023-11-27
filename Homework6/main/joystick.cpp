@@ -38,10 +38,10 @@ char joystickMove() {
         direction = 'r';
     }
     if (yValue < minThreshold ) {
-        direction = 'd';
+        direction = 'u';
     }
     if (yValue > maxThreshold) {
-        direction = 'u';
+        direction = 'd';
     }
 
     if (direction != 'n' && millis() - lastTimeRead > readDelay) {

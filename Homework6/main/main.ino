@@ -1,9 +1,9 @@
-#include "matrix.h"
+#include "map.h"
 #include "player.h"
 #include "joystick.h"
 #include "bullet.h"
 
-int matrix[matrixSize][matrixSize];
+int gameMap[mapSize][mapSize];
 
 void setup() {
     Serial.begin(9600);
@@ -11,19 +11,20 @@ void setup() {
     setupMatrix();
     setupJoystick();
 
-    generateMatrix(matrix);
-    generatePlayerPosition(matrix);
+    generateMap(gameMap);
+    generatePlayerPosition(gameMap);
 
     delay(1000);
 }
 
 void loop() {
-    showMatrix(matrix);
+    showMap(gameMap);
 
     char direction = joystickMove();
 
     if (direction != 'n')
-        movePlayer(matrix, direction);
+        movePlayer(gameMap, direction);
+        changeMiniMapPosition(getPlayerPosition(), direction);
 
     if (buttonIsPressed())
         shoot(getPlayerPosition(), getPlayerOrientation());
