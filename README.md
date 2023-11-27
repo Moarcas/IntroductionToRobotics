@@ -321,9 +321,9 @@ your flags and takes the timer back to ”000.0”.
 <h2 align="center">General description:</h2>
 
 <p align="center">
-    I developed a small game on an 8x8 matrix. In the game, I included three types of elements: a player (blinking slowly), bullets (blinking fast), and walls (not blinking). The purpose 
-    of this was to kickstart my matrix project. The basic idea was to generate walls on the map (occupying 50% - 75% of the map), and then I could move around with the player to destroy them. I 
-    implemented it in a Terminator-tanks style.
+    I developed a small game on an 8x8 matrix. In the game, I included three types of elements: a player (blinking slowly), bullets (blinking fast), and walls (not blinking). 
+    The basic idea was to generate walls on the map (occupying 50% - 75% of the map), and then I could move around with the player to destroy them. I implemented it in a Terminator-tanks style.
+    The game map can be dynamically adjusted to any size, but it is displayed on the 8x8 matrix in the form of a fog of war. This adds an extra layer of strategy, allowing players to explore the map as     they progress.
 </p>
 
 <h2 align="center">Components</h2>
