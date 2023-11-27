@@ -352,8 +352,8 @@ your flags and takes the timer back to ”000.0”.
 <h2 align="center">Video</h2>
 
 <p align="center">
-  <a href="https://youtu.be/lzJ52zH16vg">
-    <img src="https://img.youtube.com/vi/lzJ52zH16vg/maxresdefault.jpg" alt="Watch the video">
+  <a href="https://youtu.be/6ZLB3mJZwZM">
+    <img src="https://img.youtube.com/vi/6ZLB3mJZwZM/maxresdefault.jpg" alt="Watch the video">
   </a>
 </p>
 </details>
