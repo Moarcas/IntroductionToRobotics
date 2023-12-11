@@ -358,4 +358,61 @@ your flags and takes the timer back to ”000.0”.
 </p>
 </details>
 
+  <details>
+    <summary>
+       Homework7 - Mini 8x8 LED Matrix game - Update
+    </summary>
+    
+<h1 align="center">Homework7 - Mini 8x8 LED Matrix game - Update</h1>
+
+<p align="center">
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework6/homework6.jpg" alt=" Matrix Game Photo">
+</p>
+
+<h2 align="center">New funcntionalities</h2>
+
+<ol>
+        <li><h4>Intro Message</h4>
+        When powering up the project, a greeting messageshould be shown until the joystick is pressed</li>
+        <li>
+        <h4>Menu</h4> 
+        <ol>
+          <li>Start game</li>
+          <li>Settings</li>
+          <li>About</li>
+        </ol>
+        </li>
+        <li><h4>End message</h4></li>
+          When the game ends, add a message. Wait for a promt
+          from the user (a button push, for example), before returning to main menu
+          again.
+        <li>
+          <h4>During gameplay</h4>
+          <ol>
+          <li>
+            Show relevant details, that are dynamic (change with gameplay):
+            time, level, lives etc. Doesn’t matter, what can be used. You can
+            implement the number of LEDs that are still switched on.
+          </li>
+          <li>
+            Implement an end game / level functionality. You current game
+            should end. For example, if you implemented the game where you
+            ”destroy” all the LEDs, it should end when you finished them all.
+            Upon ending, it should display the aforementioned message, wait for
+            user prompt and then return to the main menu again.
+          </li>
+          </ol>  
+        </li>
+</ol>
+
+<h2 align="center">Video</h2>
+
+<p align="center">
+  <a href="https://youtu.be/6ZLB3mJZwZM">
+    <img src="https://img.youtube.com/vi/6ZLB3mJZwZM/maxresdefault.jpg" alt="Watch the video">
+  </a>
+</p>
+</details>
+
+
 
