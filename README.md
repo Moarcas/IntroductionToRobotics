@@ -366,7 +366,7 @@ your flags and takes the timer back to ”000.0”.
 <h1 align="center">Homework7 - Mini 8x8 LED Matrix game - Update</h1>
 
 <p align="center">
-  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework6/homework6.jpg" alt=" Matrix Game Photo">
+  <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework7/homework7.jpg" alt=" Matrix Game Photo">
 </p>
 
 <h2 align="center">New funcntionalities</h2>
@@ -403,11 +403,8 @@ your flags and takes the timer back to ”000.0”.
 <h2 align="center">Video</h2>
 
 <p align="center">
-  <a href="https://youtu.be/6ZLB3mJZwZM">
-    <img src="https://img.youtube.com/vi/6ZLB3mJZwZM/maxresdefault.jpg" alt="Watch the video">
+  <a href="https://youtu.be/YwGwXIa1WuM">
+    <img src="https://img.youtube.com/vi/YwGwXIa1WuM/maxresdefault.jpg" alt="Watch the video">
   </a>
 </p>
 </details>
-
-
-
