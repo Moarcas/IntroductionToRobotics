@@ -373,7 +373,7 @@ your flags and takes the timer back to ”000.0”.
 
 <ol>
         <li><h4>Intro Message</h4>
-        When powering up the project, a greeting messageshould be shown until the joystick is pressed</li>
+        When powering up the project, a greeting message should be shown until the joystick is pressed</li>
         <li>
         <h4>Menu</h4> 
         <ol>
@@ -383,26 +383,21 @@ your flags and takes the timer back to ”000.0”.
         </ol>
         </li>
         <li><h4>End message</h4></li>
-          When the game ends, add a message. Wait for a promt
-          from the user (a button push, for example), before returning to main menu
-          again.
-        <li>
-          <h4>During gameplay</h4>
-          <ol>
-          <li>
-            Show relevant details, that are dynamic (change with gameplay):
-            time, level, lives etc. Doesn’t matter, what can be used. You can
-            implement the number of LEDs that are still switched on.
-          </li>
-          <li>
-            Implement an end game / level functionality. You current game
-            should end. For example, if you implemented the game where you
-            ”destroy” all the LEDs, it should end when you finished them all.
-            Upon ending, it should display the aforementioned message, wait for
-            user prompt and then return to the main menu again.
-          </li>
-          </ol>  
-        </li>
+          When the game ends, add a message. Wait for a button push 
+          from the user, before returning to main menu again.
+       <li>
+        <h4>During gameplay</h4>
+        <ol>
+            <li>
+                I've implemented a dynamic health system in the game. The player's life decreases over time, and relevant details, such as the remaining lives, are displayed. To enhance longevity, players receive additional lives by successfully turning off LEDs.
+            </li>
+            <li>
+                The game gracefully concludes when the player's life reaches zero. In the event of successfully "destroying" all LEDs, the game also ends. A concluding message is displayed, awaiting user input. Upon user interaction, the game seamlessly returns to the main menu.
+            </li>
+        </ol>  
+    </li>
+
+  
 </ol>
 
 <h2 align="center">Video</h2>
