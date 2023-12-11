@@ -15,4 +15,6 @@ void lcdShowGameInfo();
 
 void lcdShowEndGame();
 
+void lcdPrintAbout();
+
 #endif

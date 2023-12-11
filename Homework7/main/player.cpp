@@ -12,7 +12,7 @@ char playerOrientation = 'u';
 int playerLife = 100;
 
 unsigned long lastLifeDecrement;
-const int lifeDecrementDelay = 1000;
+const int lifeDecrementDelay = 100;
 
 void generatePlayerPosition() {
     for (int i = 0; i < mapSize; i++) 

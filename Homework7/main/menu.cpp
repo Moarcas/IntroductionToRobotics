@@ -50,7 +50,7 @@ void showMenu() {
             lcdPrintBrightnessLevel(matrixGetBrightnessLevel());
             break;
         case SHOW_ABOUT:
-            // TODO
+            lcdPrintAbout();
             break;
     }
 }
@@ -96,8 +96,7 @@ void processGame(char action) {
 }
 
 void processEndGame(char action) {
-    // TODO: show matrix animation
-    if (action == 'p') 
+    if (action == 'p')
         currentMenuState = START_GAME;
 
 }
@@ -188,6 +187,11 @@ void processSetMatrixBrightness(char action) {
     }
 }
 
+void processShowAbout(char action) {
+    if (action == 'p')
+        currentMenuState = ABOUT;
+}
+
 void processMenuState(char action) {
     switch (currentMenuState) {
         case INTRO:
@@ -224,7 +228,7 @@ void processMenuState(char action) {
             processSetMatrixBrightness(action);
             break;
         case SHOW_ABOUT:
-            //TODO
+            processShowAbout(action);
             break;
     }
     if (action != 'n' || currentMenuState == GAME)

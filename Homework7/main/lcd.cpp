@@ -11,7 +11,7 @@ const int d5 = 6;
 const int d6 = 5;
 const int d7 = 4;
 const int brightnessPin = 3;
-const int brightnessMemoryAddress = 0; 
+const int brightnessMemoryAddress = 0;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 const int maxLevelBrightness = 14;
@@ -94,7 +94,7 @@ void lcdChangeBrightnessLevel(int difference) {
     EEPROM.get(brightnessMemoryAddress, brightnessLevel);
     newBrightnessLevel = brightnessLevel + difference;
     if (newBrightnessLevel >= 1 && newBrightnessLevel <= maxLevelBrightness) {
-        EEPROM.put(brightnessMemoryAddress, newBrightnessLevel);         
+        EEPROM.put(brightnessMemoryAddress, newBrightnessLevel);
         analogWrite(brightnessPin, brightnessValueFromLevel(newBrightnessLevel));
     }
 }
@@ -116,4 +116,12 @@ void lcdShowGameInfo() {
     lcd.setCursor(12, 0);
     lcd.write((byte)2);
     lcd.print(getPlayerLife());
+}
+
+void lcdPrintAbout() {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("git: moarcascosmin");
+    lcd.setCursor(0, 1);
+    lcd.print("Name: Cosmin");
 }
