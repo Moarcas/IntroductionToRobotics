@@ -369,7 +369,7 @@ your flags and takes the timer back to ”000.0”.
   <img src="https://github.com/Moarcas/IntroductionToRobotics/blob/master/Homework7/homework7.jpg" alt=" Matrix Game Photo">
 </p>
 
-<h2 align="center">New funcntionalities</h2>
+<h2 align="center">New functionalities</h2>
 
 <ol>
         <li><h4>Intro Message</h4>
